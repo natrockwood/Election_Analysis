@@ -51,6 +51,19 @@ with open(file_to_load) as election_data:
         # 3.3 Add votes to the count
         candidate_votes[candidate_name] += 1
 
+# 6. Save results to text file
+with open(file_to_save, "w") as txt_file:
+
+    election_results = (
+        f"\nElection Results\n"
+        f"-------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"-------------------------\n")
+    print(election_results, end="")
+
+    # Save the final vote count to the text file.
+    txt_file.write(election_results)
+
     # 4.0 Determine the % of votes for each candidate by looping through the counts
     # 4.1 Iterate through the cadidate list
     for candidate in candidate_votes:
@@ -62,7 +75,10 @@ with open(file_to_load) as election_data:
         # 4.4 Print the cand name and % votes
         # print(f"{candidate}: received {votes:,} and {vote_percentage:.2f}% of the votes.")
         # 5.4 print out each candidate's name, vote count, and percentage of votes to the terminal.
-        print(f"{candidate}: {vote_percentage:.1f}% ({votes:,})\n")
+        candidate_results = (f"{candidate}: {vote_percentage:.1f}% ({votes:,})\n")
+
+        print(candidate_results)
+        txt_file.write(candidate_results)
 
         # 5.2 Determine winning vote count and cand
         # 5.3 Determine if the votes is greater than the winning count.
@@ -81,14 +97,12 @@ with open(file_to_load) as election_data:
         f"Winning Percentage: {winning_percentage:.1f}%\n"
         f"-------------------------\n")
     print(winning_cand_summary)
+    txt_file.write(winning_cand_summary)
 
-# 3.4 Print Candidate vote dictionary
-# print(candidate_votes)
+        # 3.4 Print Candidate vote dictionary
+        # print(candidate_votes)
 
-# 2.4 Print Candidate List
-# print(candidate_options)
-# 1.3 Print total votes
-# print(total_votes)
-
-# Using the with statement open the file as a text file.
-# with open(file_to_save, "w") as txt_file
+        # 2.4 Print Candidate List
+        # print(candidate_options)
+        # 1.3 Print total votes
+        # print(total_votes)
